@@ -256,6 +256,7 @@ export class TemplateParser extends BaseParser {
   parseMeasure(measureData: string, noteCount: number, expectedBeats: number) {
     // #region 处理三连音
     const tripletRegex = /3\(([^)]*)\)/g;
+    const splitRegex = /,(?![^<>]*>)/;
     let match: RegExpExecArray | null;
     const tripletGroups: { start: number; end: number; notes: string[] }[] = [];
     // 先找出所有三连音片段及其位置
@@ -280,7 +281,7 @@ export class TemplateParser extends BaseParser {
         // 先加前面的普通音符
         const before = measureData.slice(cursor, group.start);
         if (before) {
-          before.split(/,(?![^<>]*>)/).forEach((n) => {
+          before.split(splitRegex).forEach((n) => {
             if (n.trim() !== '') {
               tripletFlatNotes.push({ note: n.trim(), isTriplet: false });
             }
@@ -302,7 +303,7 @@ export class TemplateParser extends BaseParser {
       // 末尾剩余
       const after = measureData.slice(cursor);
       if (after) {
-        after.split(/,(?![^<>]*>)/).forEach((n) => {
+        after.split(splitRegex).forEach((n) => {
           if (n.trim() !== '') {
             tripletFlatNotes.push({ note: n.trim(), isTriplet: false });
           }
@@ -310,7 +311,7 @@ export class TemplateParser extends BaseParser {
       }
     } else {
       // 没有三连音，按原有逻辑分割
-      measureData.split(/,(?![^<>]*>)/).forEach((n) => {
+      measureData.split(splitRegex).forEach((n) => {
         if (n.trim() !== '') {
           tripletFlatNotes.push({ note: n.trim(), isTriplet: false });
         }

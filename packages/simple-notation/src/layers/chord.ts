@@ -108,13 +108,12 @@ export class SNChordLayer {
             sectionRepeatGroup.appendChild(lPath);
 
             elementToDraw = sectionRepeatGroup;
-          } else if (ChordTool.guitarChordPositionsMap[symbol]) {
+          } else {
             // 绘制和弦符号
             // 和弦符号位置相对于当前音符中心
             const chordX = baseX;
             const chordY = baseY + verticalOffset; // 应用垂直偏移
-
-            if (chordType === 'guitar') {
+            if (ChordTool.guitarChordPositionsMap[symbol] && chordType === 'guitar') {
               // 查找和弦指位（吉他指位图）
               const positions =
                 ChordTool.guitarChordPositionsMap[symbol] ??

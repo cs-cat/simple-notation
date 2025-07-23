@@ -576,22 +576,22 @@ export class SNNote extends SNBox {
               }),
             );
           });
+          return;
         }
-      } else {
-        this.el.appendChild(
-          SvgUtils.createText({
-            x: baseX,
-            y: baseY,
-            text: '0',
-            fontSize: 18,
-            fontFamily:
-              '"SimSun", "STSong", "STFangsong", "FangSong", "FangSong_GB2312", "KaiTi", "KaiTi_GB2312", "STKaiti", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", "WenQuanYi Micro Hei", serif',
-            textAnchor: 'middle',
-            strokeWidth: 1,
-            stroke: this.isError ? 'red' : 'black',
-          }),
-        );
       }
+      this.el.appendChild(
+        SvgUtils.createText({
+          x: baseX,
+          y: baseY,
+          text: '0',
+          fontSize: 18,
+          fontFamily:
+            '"SimSun", "STSong", "STFangsong", "FangSong", "FangSong_GB2312", "KaiTi", "KaiTi_GB2312", "STKaiti", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", "WenQuanYi Micro Hei", serif',
+          textAnchor: 'middle',
+          strokeWidth: 1,
+          stroke: this.isError ? 'red' : 'black',
+        }),
+      );
     }
   }
 
